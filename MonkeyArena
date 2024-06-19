@@ -1,0 +1,132 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Monkey Arena Made By Blast", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+--[[
+Name = <string> - The name of the UI.
+HidePremium = <bool> - Whether or not the user details shows Premium status or not.
+SaveConfig = <bool> - Toggles the config saving in the UI.
+ConfigFolder = <string> - The name of the folder where the configs are saved.
+IntroEnabled = <bool> - Whether or not to show the intro animation.
+IntroText = <string> - Text to show in the intro animation.
+IntroIcon = <string> - URL to the image you want to use in the intro animation.
+Icon = <string> - URL to the image you want displayed on the window.
+CloseCallback = <function> - Function to execute when the window is closed.
+]]
+
+OrionLib:MakeNotification({
+	Name = "Notification!!",
+	Content = "Subscribe to Robloxblast on yt",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "Main",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+
+Tab:AddButton({
+	Name = "Tp the Bananas to you",
+	Callback = function()
+                  local banana = game.Workspace.Prefabs
+local me = game.Players.LocalPlayer.Character.HumanoidRootPart
+
+for _, v in pairs(banana:GetChildren()) do
+v.CFrame = me.CFrame
+end
+  	end    
+})
+
+
+Tab:AddButton({
+	Name = "Get Kills",
+	Callback = function()
+      		game:GetService("ReplicatedStorage").DailySpin.DailySpinIncrease:FireServer(kill, "Kills")
+  	end    
+})
+
+
+Tab:AddDropdown({
+	Name = "How much Kills you want",
+	Default = "1",
+	Options = {"1", "1000", "10000", "1000000", "100000000", "1111111111111", "11111111111111"},
+	Callback = function(Value)
+		kill = Value
+	end    
+})
+
+
+Tab:AddButton({
+	Name = "Get Bananas",
+	Callback = function()
+      		game:GetService("ReplicatedStorage").DailySpin.DailySpinIncrease:FireServer(banana, "Bananas")
+  	end    
+})
+
+
+Tab:AddDropdown({
+	Name = "How much Bananas you want",
+	Default = "1",
+	Options = {"1", "1000", "10000", "1000000", "100000000", "1111111111111", "11111111111111"},
+	Callback = function(Value)
+		banana = Value
+	end    
+})
+
+
+Tab:AddButton({
+	Name = "Get Spins",
+	Callback = function()
+      		game:GetService("ReplicatedStorage").DailySpin.DailySpinIncrease:FireServer(wheel, "Spin")
+  	end    
+})
+
+
+Tab:AddDropdown({
+	Name = "How much Spins you want",
+	Default = "1",
+	Options = {"1", "10", "100", "1000", "10000", "100000", "1000000"},
+	Callback = function(Value)
+		wheel = Value
+	end    
+})
+
+
+Tab:AddToggle({
+	Name = "Auto Rebirth",
+	Default = false,
+	Callback = function(Value)
+		getgenv(). Reb = Value 
+		
+		while getgenv(). Reb do
+		game:GetService("ReplicatedStorage"):WaitForChild("PlayerEvents"):WaitForChild("Multiplier"):WaitForChild("PlayerBananaMultiplier"):FireServer(game:GetService("Players").LocalPlayer)
+		wait(0.2)
+		end
+	end    
+})
+
+
+Tab:AddButton({
+	Name = "Respawn (you won't lose your level)",
+	Callback = function()
+      		game:GetService("ReplicatedStorage"):WaitForChild("Player"):WaitForChild("RespawnPlayer"):FireServer()
+      print("This is made by Robloxblast Fired Script")
+  	end    
+})
+
+
+Tab:AddToggle({
+	Name = "Punch Aura (Hella OP)",
+	Default = false,
+	Callback = function(Value)
+		getgenv(). attack = Value
+		
+		while getgenv(). attack do
+		game:GetService("ReplicatedStorage"):WaitForChild("PlayerEvents"):WaitForChild("PlayerAttackLight"):FireServer()
+		wait(0.01)
+		end
+	end    
+})
